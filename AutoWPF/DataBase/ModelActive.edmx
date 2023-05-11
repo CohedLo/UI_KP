@@ -1,0 +1,673 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище AMHAModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Active">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="float" Nullable="false" />
+          <Property Name="ID мероприятия" Type="float" />
+          <Property Name="Активность" Type="nvarchar" MaxLength="255" />
+          <Property Name="День" Type="float" />
+          <Property Name="Время начала" Type="datetime" />
+          <Property Name="Модератор" Type="float" />
+          <Property Name="Жюри 1" Type="float" />
+          <Property Name="Жюри 2" Type="float" />
+          <Property Name="Жюри 3" Type="float" />
+          <Property Name="Жюри 4" Type="float" />
+          <Property Name="Жюри 5" Type="float" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="float" Nullable="false" />
+          <Property Name="Мероприятие" Type="nvarchar" MaxLength="255" />
+          <Property Name="Дата" Type="datetime" />
+          <Property Name="Дни" Type="float" />
+          <Property Name="Город" Type="float" />
+          <Property Name="Победитель" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Folk">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="float" Nullable="false" />
+          <Property Name="ФИО" Type="nvarchar" MaxLength="255" />
+          <Property Name="пол" Type="nvarchar" MaxLength="255" />
+          <Property Name="почта" Type="nvarchar" MaxLength="255" />
+          <Property Name="дата рождения" Type="datetime" />
+          <Property Name="страна" Type="float" />
+          <Property Name="телефон" Type="nvarchar" MaxLength="255" />
+          <Property Name="направление" Type="nvarchar" MaxLength="255" />
+          <Property Name="пароль" Type="nvarchar" MaxLength="255" />
+          <Property Name="фото" Type="nvarchar" MaxLength="255" />
+          <Property Name="Роль" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Города">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="float" Nullable="false" />
+          <Property Name="Название" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Страны">
+          <Key>
+            <PropertyRef Name="Код2" />
+          </Key>
+          <Property Name="Название страны" Type="nvarchar" MaxLength="255" />
+          <Property Name="Английское название" Type="nvarchar" MaxLength="255" />
+          <Property Name="Код" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Код2" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Active_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
+          <End Role="Active" Type="Self.Active" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Active">
+              <PropertyRef Name="ID мероприятия" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Active_Folk">
+          <End Role="Folk" Type="Self.Folk" Multiplicity="0..1" />
+          <End Role="Active" Type="Self.Active" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Folk">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Active">
+              <PropertyRef Name="Жюри 1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Active_Folk1">
+          <End Role="Folk" Type="Self.Folk" Multiplicity="0..1" />
+          <End Role="Active" Type="Self.Active" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Folk">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Active">
+              <PropertyRef Name="Модератор" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Active_Folk2">
+          <End Role="Folk" Type="Self.Folk" Multiplicity="0..1" />
+          <End Role="Active" Type="Self.Active" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Folk">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Active">
+              <PropertyRef Name="Жюри 2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Active_Folk3">
+          <End Role="Folk" Type="Self.Folk" Multiplicity="0..1" />
+          <End Role="Active" Type="Self.Active" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Folk">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Active">
+              <PropertyRef Name="Жюри 4" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Active_Folk4">
+          <End Role="Folk" Type="Self.Folk" Multiplicity="0..1" />
+          <End Role="Active" Type="Self.Active" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Folk">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Active">
+              <PropertyRef Name="Жюри 3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Active_Folk5">
+          <End Role="Folk" Type="Self.Folk" Multiplicity="0..1" />
+          <End Role="Active" Type="Self.Active" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Folk">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Active">
+              <PropertyRef Name="Жюри 5" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Города">
+          <End Role="Города" Type="Self.Города" Multiplicity="0..1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Города">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="Город" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Folk_Страны">
+          <End Role="Страны" Type="Self.Страны" Multiplicity="0..1" />
+          <End Role="Folk" Type="Self.Folk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Страны">
+              <PropertyRef Name="Код2" />
+            </Principal>
+            <Dependent Role="Folk">
+              <PropertyRef Name="страна" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Хранилище AMHAModelContainer">
+          <EntitySet Name="Active" EntityType="Self.Active" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Folk" EntityType="Self.Folk" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Города" EntityType="Self.Города" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Страны" EntityType="Self.Страны" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Active_Event" Association="Self.FK_Active_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Active" EntitySet="Active" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Active_Folk" Association="Self.FK_Active_Folk">
+            <End Role="Folk" EntitySet="Folk" />
+            <End Role="Active" EntitySet="Active" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Active_Folk1" Association="Self.FK_Active_Folk1">
+            <End Role="Folk" EntitySet="Folk" />
+            <End Role="Active" EntitySet="Active" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Active_Folk2" Association="Self.FK_Active_Folk2">
+            <End Role="Folk" EntitySet="Folk" />
+            <End Role="Active" EntitySet="Active" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Active_Folk3" Association="Self.FK_Active_Folk3">
+            <End Role="Folk" EntitySet="Folk" />
+            <End Role="Active" EntitySet="Active" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Active_Folk4" Association="Self.FK_Active_Folk4">
+            <End Role="Folk" EntitySet="Folk" />
+            <End Role="Active" EntitySet="Active" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Active_Folk5" Association="Self.FK_Active_Folk5">
+            <End Role="Folk" EntitySet="Folk" />
+            <End Role="Active" EntitySet="Active" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Города" Association="Self.FK_Event_Города">
+            <End Role="Города" EntitySet="Города" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Folk_Страны" Association="Self.FK_Folk_Страны">
+            <End Role="Страны" EntitySet="Страны" />
+            <End Role="Folk" EntitySet="Folk" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AMHAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Active">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Double" Nullable="false" />
+          <Property Name="ID_мероприятия" Type="Double" />
+          <Property Name="Активность" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="День" Type="Double" />
+          <Property Name="Время_начала" Type="DateTime" Precision="3" />
+          <Property Name="Модератор" Type="Double" />
+          <Property Name="Жюри_1" Type="Double" />
+          <Property Name="Жюри_2" Type="Double" />
+          <Property Name="Жюри_3" Type="Double" />
+          <Property Name="Жюри_4" Type="Double" />
+          <Property Name="Жюри_5" Type="Double" />
+          <NavigationProperty Name="Event" Relationship="Self.FK_Active_Event" FromRole="Active" ToRole="Event" />
+          <NavigationProperty Name="Folk" Relationship="Self.FK_Active_Folk" FromRole="Active" ToRole="Folk" />
+          <NavigationProperty Name="Folk1" Relationship="Self.FK_Active_Folk1" FromRole="Active" ToRole="Folk" />
+          <NavigationProperty Name="Folk2" Relationship="Self.FK_Active_Folk2" FromRole="Active" ToRole="Folk" />
+          <NavigationProperty Name="Folk3" Relationship="Self.FK_Active_Folk3" FromRole="Active" ToRole="Folk" />
+          <NavigationProperty Name="Folk4" Relationship="Self.FK_Active_Folk4" FromRole="Active" ToRole="Folk" />
+          <NavigationProperty Name="Folk5" Relationship="Self.FK_Active_Folk5" FromRole="Active" ToRole="Folk" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Double" Nullable="false" />
+          <Property Name="Мероприятие" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Дата" Type="DateTime" Precision="3" />
+          <Property Name="Дни" Type="Double" />
+          <Property Name="Город" Type="Double" />
+          <Property Name="Победитель" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Active" Relationship="Self.FK_Active_Event" FromRole="Event" ToRole="Active" />
+          <NavigationProperty Name="Города" Relationship="Self.FK_Event_Города" FromRole="Event" ToRole="Города" />
+        </EntityType>
+        <EntityType Name="Folk">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Double" Nullable="false" />
+          <Property Name="ФИО" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="пол" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="почта" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="дата_рождения" Type="DateTime" Precision="3" />
+          <Property Name="страна" Type="Double" />
+          <Property Name="телефон" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="направление" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="пароль" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="фото" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Роль" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Active" Relationship="Self.FK_Active_Folk" FromRole="Folk" ToRole="Active" />
+          <NavigationProperty Name="Active1" Relationship="Self.FK_Active_Folk1" FromRole="Folk" ToRole="Active" />
+          <NavigationProperty Name="Active2" Relationship="Self.FK_Active_Folk2" FromRole="Folk" ToRole="Active" />
+          <NavigationProperty Name="Active3" Relationship="Self.FK_Active_Folk3" FromRole="Folk" ToRole="Active" />
+          <NavigationProperty Name="Active4" Relationship="Self.FK_Active_Folk4" FromRole="Folk" ToRole="Active" />
+          <NavigationProperty Name="Active5" Relationship="Self.FK_Active_Folk5" FromRole="Folk" ToRole="Active" />
+          <NavigationProperty Name="Страны" Relationship="Self.FK_Folk_Страны" FromRole="Folk" ToRole="Страны" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Города">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Double" Nullable="false" />
+          <Property Name="Название" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Event" Relationship="Self.FK_Event_Города" FromRole="Города" ToRole="Event" />
+        </EntityType>
+        <EntityType Name="Страны">
+          <Key>
+            <PropertyRef Name="Код2" />
+          </Key>
+          <Property Name="Название_страны" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Английское_название" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Код" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Код2" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Folk" Relationship="Self.FK_Folk_Страны" FromRole="Страны" ToRole="Folk" />
+        </EntityType>
+        <Association Name="FK_Active_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
+          <End Role="Active" Type="Self.Active" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Active">
+              <PropertyRef Name="ID_мероприятия" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Active_Folk">
+          <End Role="Folk" Type="Self.Folk" Multiplicity="0..1" />
+          <End Role="Active" Type="Self.Active" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Folk">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Active">
+              <PropertyRef Name="Жюри_1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Active_Folk1">
+          <End Role="Folk" Type="Self.Folk" Multiplicity="0..1" />
+          <End Role="Active" Type="Self.Active" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Folk">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Active">
+              <PropertyRef Name="Модератор" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Active_Folk2">
+          <End Role="Folk" Type="Self.Folk" Multiplicity="0..1" />
+          <End Role="Active" Type="Self.Active" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Folk">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Active">
+              <PropertyRef Name="Жюри_2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Active_Folk3">
+          <End Role="Folk" Type="Self.Folk" Multiplicity="0..1" />
+          <End Role="Active" Type="Self.Active" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Folk">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Active">
+              <PropertyRef Name="Жюри_4" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Active_Folk4">
+          <End Role="Folk" Type="Self.Folk" Multiplicity="0..1" />
+          <End Role="Active" Type="Self.Active" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Folk">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Active">
+              <PropertyRef Name="Жюри_3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Active_Folk5">
+          <End Role="Folk" Type="Self.Folk" Multiplicity="0..1" />
+          <End Role="Active" Type="Self.Active" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Folk">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Active">
+              <PropertyRef Name="Жюри_5" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Города">
+          <End Role="Города" Type="Self.Города" Multiplicity="0..1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Города">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="Город" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Folk_Страны">
+          <End Role="Страны" Type="Self.Страны" Multiplicity="0..1" />
+          <End Role="Folk" Type="Self.Folk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Страны">
+              <PropertyRef Name="Код2" />
+            </Principal>
+            <Dependent Role="Folk">
+              <PropertyRef Name="страна" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AMHAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Active" EntityType="Self.Active" />
+          <EntitySet Name="Event" EntityType="Self.Event" />
+          <EntitySet Name="Folk" EntityType="Self.Folk" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Города" EntityType="Self.Города" />
+          <EntitySet Name="Страны" EntityType="Self.Страны" />
+          <AssociationSet Name="FK_Active_Event" Association="Self.FK_Active_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Active" EntitySet="Active" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Active_Folk" Association="Self.FK_Active_Folk">
+            <End Role="Folk" EntitySet="Folk" />
+            <End Role="Active" EntitySet="Active" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Active_Folk1" Association="Self.FK_Active_Folk1">
+            <End Role="Folk" EntitySet="Folk" />
+            <End Role="Active" EntitySet="Active" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Active_Folk2" Association="Self.FK_Active_Folk2">
+            <End Role="Folk" EntitySet="Folk" />
+            <End Role="Active" EntitySet="Active" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Active_Folk3" Association="Self.FK_Active_Folk3">
+            <End Role="Folk" EntitySet="Folk" />
+            <End Role="Active" EntitySet="Active" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Active_Folk4" Association="Self.FK_Active_Folk4">
+            <End Role="Folk" EntitySet="Folk" />
+            <End Role="Active" EntitySet="Active" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Active_Folk5" Association="Self.FK_Active_Folk5">
+            <End Role="Folk" EntitySet="Folk" />
+            <End Role="Active" EntitySet="Active" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Города" Association="Self.FK_Event_Города">
+            <End Role="Города" EntitySet="Города" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Folk_Страны" Association="Self.FK_Folk_Страны">
+            <End Role="Страны" EntitySet="Страны" />
+            <End Role="Folk" EntitySet="Folk" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(AMHAModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(AMHAModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище AMHAModelContainer" CdmEntityContainer="AMHAEntities">
+          <EntitySetMapping Name="Active">
+            <EntityTypeMapping TypeName="AMHAModel.Active">
+              <MappingFragment StoreEntitySet="Active">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_мероприятия" ColumnName="ID мероприятия" />
+                <ScalarProperty Name="Активность" ColumnName="Активность" />
+                <ScalarProperty Name="День" ColumnName="День" />
+                <ScalarProperty Name="Время_начала" ColumnName="Время начала" />
+                <ScalarProperty Name="Модератор" ColumnName="Модератор" />
+                <ScalarProperty Name="Жюри_1" ColumnName="Жюри 1" />
+                <ScalarProperty Name="Жюри_2" ColumnName="Жюри 2" />
+                <ScalarProperty Name="Жюри_3" ColumnName="Жюри 3" />
+                <ScalarProperty Name="Жюри_4" ColumnName="Жюри 4" />
+                <ScalarProperty Name="Жюри_5" ColumnName="Жюри 5" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Event">
+            <EntityTypeMapping TypeName="AMHAModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Мероприятие" ColumnName="Мероприятие" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="Дни" ColumnName="Дни" />
+                <ScalarProperty Name="Город" ColumnName="Город" />
+                <ScalarProperty Name="Победитель" ColumnName="Победитель" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Folk">
+            <EntityTypeMapping TypeName="AMHAModel.Folk">
+              <MappingFragment StoreEntitySet="Folk">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ФИО" ColumnName="ФИО" />
+                <ScalarProperty Name="пол" ColumnName="пол" />
+                <ScalarProperty Name="почта" ColumnName="почта" />
+                <ScalarProperty Name="дата_рождения" ColumnName="дата рождения" />
+                <ScalarProperty Name="страна" ColumnName="страна" />
+                <ScalarProperty Name="телефон" ColumnName="телефон" />
+                <ScalarProperty Name="направление" ColumnName="направление" />
+                <ScalarProperty Name="пароль" ColumnName="пароль" />
+                <ScalarProperty Name="фото" ColumnName="фото" />
+                <ScalarProperty Name="Роль" ColumnName="Роль" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="AMHAModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Города">
+            <EntityTypeMapping TypeName="AMHAModel.Города">
+              <MappingFragment StoreEntitySet="Города">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Страны">
+            <EntityTypeMapping TypeName="AMHAModel.Страны">
+              <MappingFragment StoreEntitySet="Страны">
+                <ScalarProperty Name="Название_страны" ColumnName="Название страны" />
+                <ScalarProperty Name="Английское_название" ColumnName="Английское название" />
+                <ScalarProperty Name="Код" ColumnName="Код" />
+                <ScalarProperty Name="Код2" ColumnName="Код2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище AMHAModel.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище AMHAModel.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище AMHAModel.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище AMHAModel.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AMHAModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище AMHAModel.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AMHAModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище AMHAModel.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище AMHAModel.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
